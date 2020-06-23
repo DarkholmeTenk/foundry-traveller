@@ -1,0 +1,22 @@
+{
+    "Traveller.NoteButton": "Travel Links",
+    "Traveller.ConfigTitle": "Configure Travel Links",
+    "Traveller.Almsivi": "Almsivi Intervention",
+    "Traveller.Divine": "Divine Intervention",
+    "Traveller.Mages": "Mages Guild Guide",
+    "Traveller.SiltStrider": "Silt Strider",
+    "Traveller.Propylon": "Dunmer Stronghold Propylon Travel",
+    "Traveller.Boat": "Boat",
+    "Traveller.Direct": "Direct Teleportation",
+
+    "Traveller.Target": "Route Destination",
+    "Traveller.Cost": "Cost Per Person",
+    "Traveller.Duration": "Journey Duration (H)",
+    "Traveller.SaveChanges": "Save",
+
+    "Traveller.ShowTravel": "Show Travel",
+    "Traveller.ShowMages": "Show Mages Guild Guides",
+    "Traveller.ShowSiltStrider": "Show Silt Strider Routes",
+    "Traveller.ShowBoat": "Show Boat Routes",
+    "Traveller.ShowPropylon": "Show Dunmer Stronghold Propylon Routes"
+}

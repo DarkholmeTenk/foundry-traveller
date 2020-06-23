@@ -1,0 +1,59 @@
+<form>
+    <strong>{{localize "Traveller.Enabled"}}</strong>
+    <input class="flex2" type='checkbox' name='isTravel' {{ checked data.isTravel }} />
+    <section>
+        <h2>Teleportation</h2>
+        <ol>
+            <li class="flexrow">
+                <strong>{{localize "Traveller.Mages"}}</strong>
+                <input class="flex2" type='checkbox' name='mages' {{ checked data.mages }} />
+            </li>
+            {{#each tpRoute as |tp _|}}
+            <li class="flexrow">
+                <strong>{{localize tp.key}}</strong>
+                <input class="flex2" type='checkbox' name='{{tp.id}}' {{ checked tp.set }} />
+            </li>
+            {{/each}}
+        </ol>
+    </section>
+    <section>
+        {{#each p2pRoute as |p2pMethod _|}}
+        <h2>{{localize p2pMethod.key}}</h2>
+        <ol>
+            {{#each p2pMethod.data as |silt key|}}
+            <li class="flexrow">
+                <ol>
+                    <li class="flexrow">
+                        <strong>{{localize "Traveller.Target"}}</strong>
+                        <select class="flex2" name="{{p2pMethod.id}}.{{key}}.target" title="Target">
+                            {{#select silt.target}}
+                            <option value="">&nbsp;</option>
+                            {{#each ../../otherNodes as |node nodeKey|}}
+                            <option value="{{node.entry._id}}">{{node.entry.name}}</option>
+                            {{/each}}
+                            {{/select}}
+                        </select>
+                    </li>
+                    <li class="flexrow">
+                        <strong>{{localize "Traveller.Cost"}}</strong>
+                        <input type="number" value="{{silt.cost}}" name="{{p2pMethod.id}}.{{key}}.cost" />
+                    </li>
+                    <li class="flexrow">
+                        <strong>{{localize "Traveller.Duration"}}</strong>
+                        <input type="number" value="{{silt.hours}}" name="{{p2pMethod.id}}.{{key}}.hours" />
+                    </li>
+                </ol>
+            </li>
+            {{/each}}
+        </ol>
+        <a name="add-row" title="Add Row" data-type="{{p2pMethod.id}}">
+            <i class="fas fa-plus"></i> Add Row
+        </a>
+        {{/each}}
+    </section>
+    <footer class="form-footer">
+        <button name="submit">
+            <i class="fas fa-save"></i> {{localize "Traveller.SaveChanges"}}
+        </button>
+    </footer>
+</form>
