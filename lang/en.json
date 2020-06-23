@@ -9,6 +9,8 @@
     "Traveller.Boat": "Boat",
     "Traveller.Direct": "Direct Teleportation",
 
+    "Traveller.Enabled": "Is Travel Destination",
+    "Traveller.Dark": "Is Ring Dark",
     "Traveller.Target": "Route Destination",
     "Traveller.Cost": "Cost Per Person",
     "Traveller.Duration": "Journey Duration (H)",
@@ -18,5 +20,6 @@
     "Traveller.ShowMages": "Show Mages Guild Guides",
     "Traveller.ShowSiltStrider": "Show Silt Strider Routes",
     "Traveller.ShowBoat": "Show Boat Routes",
-    "Traveller.ShowPropylon": "Show Dunmer Stronghold Propylon Routes"
+    "Traveller.ShowPropylon": "Show Dunmer Stronghold Propylon Routes",
+    "Traveller.Controls": "Travel Map"
 }

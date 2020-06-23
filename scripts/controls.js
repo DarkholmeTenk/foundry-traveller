@@ -6,7 +6,7 @@ log("Initialising control hooks")
 Hooks.on("getSceneControlButtons", (controls) => {
     controls.push({
         name: "travel",
-        title: "CONTROLS.Travel",
+        title: "Traveller.Controls",
         icon: "fas fa-route",
         layer: "TravelCanvasLayer",
         tools: TravellerSettings.Togglers.map(setting => ({

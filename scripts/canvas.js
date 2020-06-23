@@ -51,10 +51,10 @@ export class TravelCanvasLayer extends CanvasLayer {
             this.drawP2PLayer(color, notes, id);
         })
         this.drawTPLayer(notes)
-        let promises = notes.map(async ({note})=>{
+        let promises = notes.map(async ({note, travel})=>{
             let thing = this.addChild(new PIXI.Container());
             let circle = thing.addChild(new PIXI.Graphics());
-            circle.lineStyle(2, 0)
+            circle.lineStyle(2, travel.isDark ? 0 : 0xFFFFFF)
                 .drawCircle(note.x, note.y, 20)
         })
         await Promise.all(promises)
@@ -114,7 +114,7 @@ export class TravelCanvasLayer extends CanvasLayer {
             let center = mages.map(n => n.note).reduce((p, c) => ({ x: p.x + (c.x / mages.length), y: p.y + (c.y / mages.length) }), { x: 0, y: 0 });
             let mageContainer = this.addChild(new PIXI.Container());
             let mageGraphics = mageContainer.addChild(new PIXI.Graphics());
-            mageGraphics.lineStyle(3, 0x9428e0)
+            mageGraphics.lineStyle(3, 0xc529ff)
                 .drawCircle(center.x, center.y, 20);
             mages.forEach(mage => {
                 circleLine(mageGraphics, mage.note, center);

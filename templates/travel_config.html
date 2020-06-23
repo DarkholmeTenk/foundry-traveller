@@ -1,6 +1,14 @@
 <form>
-    <strong>{{localize "Traveller.Enabled"}}</strong>
-    <input class="flex2" type='checkbox' name='isTravel' {{ checked data.isTravel }} />
+    <ol>
+        <li class="flexrow">
+            <strong>{{localize "Traveller.Enabled"}}</strong>
+            <input class="flex2" type='checkbox' name='isTravel' {{ checked data.isTravel }} />
+        </li>
+        <li class="flexrow">
+            <strong>{{localize "Traveller.Dark"}}</strong>
+            <input class="flex2" type='checkbox' name='isDark' {{ checked data.isDark }} />
+        </li>
+    </ol>
     <section>
         <h2>Teleportation</h2>
         <ol>
