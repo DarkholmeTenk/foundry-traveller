@@ -1,6 +1,8 @@
-import { log, getTravelData } from "./util.js";
+import { getTravelData, getLogger } from "./util.js";
 import { p2pRoutes, teleportation } from "./const.js";
 import { TravellerSettings } from "./settings.js";
+
+const log = getLogger("Canvas")
 
 function shift({x, y}, angle, radius = 20) {
     return {x: x - (radius * Math.cos(angle)), y: y - (radius * Math.sin(angle))}
@@ -44,7 +46,7 @@ export class TravelCanvasLayer extends CanvasLayer {
             let travel = getTravelData(entry)
             return {note, entry, travel}
         }).filter(({travel})=>travel.isTravel)
-        log(`Identified ${notes.length} nodes to draw`, notes)
+        log.debug(`Identified ${notes.length} nodes to draw`, notes)
         this.drawMageLayer(notes);
         p2pRoutes.forEach(({id, color, setting})=>{
             if(!setting.value) return
@@ -80,8 +82,6 @@ export class TravelCanvasLayer extends CanvasLayer {
                 graphics.drawCircle(position.x, position.y, 10)
                 graphics.interactive = true
                 graphics.hitArea = new PIXI.Circle(position.x, position.y, 11)
-                graphics.mouseover = ()=>log("Mouseover")
-                graphics.mouseout = ()=>log("Mouse out")
             })
         })
     }
@@ -132,7 +132,7 @@ Hooks.once("canvasInit", canvas => {
 
 export async function refresh() {
     let args = arguments
-    log("Refreshing", args)
+    log.debug("Refreshing", args)
     let {TravelLayer} = canvas
     TravelLayer.removeChildren()
     await TravelLayer.draw()

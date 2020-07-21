@@ -1,7 +1,7 @@
-import { log, getTravelData } from "./util.js"
+import { getTravelData, getLogger } from "./util.js"
 import { p2pRoutes, teleportation } from "./const.js"
 
-console.log("Initialising journal hook")
+const log = getLogger("NoteData")
 
 function internalFlatten(data) {
     Object.keys(data).forEach(key=>{

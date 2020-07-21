@@ -2,7 +2,7 @@
 	"name": "traveller",
 	"title": "Traveller",
 	"description": "A module that allows you to add travel locations and paths to the map",
-	"version": "1.0.1",
+	"version": "1.0.2",
 	"author": "shane_booth",
 	"esmodules": [
         "scripts/canvas.js",
@@ -23,7 +23,7 @@
 	"styles": [
 		"./css/travel.css"
 	],
-	"url": "https://github.cgit om/DarkholmeTenk/foundry-traveller",
+	"url": "https://github.com/DarkholmeTenk/foundry-traveller",
 	"manifest": "https://raw.githubusercontent.com/DarkholmeTenk/foundry-traveller/master/module.json",
 	"download": "https://github.com/DarkholmeTenk/foundry-traveller/archive/master.zip"
 }

@@ -1,6 +1,6 @@
-export function log(message, ...args) {
-    console.log(`TRAVELLER | ${message}`, ...args)
-}
+import { getLoggerFactory } from "../../dc-base/scripts/util.js"
+
+export const getLogger = getLoggerFactory("Traveller")
 
 export function getTravelData(note) {
     if(note.flags) {

@@ -1,5 +1,7 @@
 import { refresh } from "./canvas.js"
-import { log } from "./util.js"
+import { getLogger } from "./util.js"
+
+const log = getLogger("Settings")
 
 export class Setting {
     constructor(name, data) {

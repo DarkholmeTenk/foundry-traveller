@@ -1,5 +1,7 @@
-import { log } from './util.js'
+import { getLogger } from './util.js'
 import { TravellerSettings } from './settings.js';
+
+const log = getLogger("Controls")
 
 log("Initialising control hooks")
 
