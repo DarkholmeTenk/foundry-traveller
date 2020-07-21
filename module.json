@@ -2,7 +2,7 @@
 	"name": "traveller",
 	"title": "Traveller",
 	"description": "A module that allows you to add travel locations and paths to the map",
-	"version": "1.0.2",
+	"version": "1.0.3",
 	"author": "shane_booth",
 	"esmodules": [
         "scripts/canvas.js",
