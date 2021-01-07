@@ -123,20 +123,31 @@ export class TravelCanvasLayer extends CanvasLayer {
     }
 }
 
+let TravelCanvasLayerInstance = new TravelCanvasLayer();
+
 log("Setting up canvas hooks")
 
-Hooks.once("canvasInit", canvas => {
+Hooks.once("init", canvas => {
     log("Initted Canvas Travel Layer")
-    canvas.TravelLayer = canvas.stage.addChild(new TravelCanvasLayer(canvas));
+    
+    const layers = mergeObject(Canvas.layers, {
+        TravelCanvasLayer
+    });
+    Object.defineProperty(Canvas, 'layers', {
+        get: function () {
+            return layers
+        }
+    });
 });
 
 export async function refresh() {
     let args = arguments
     log.debug("Refreshing", args)
-    let {TravelLayer} = canvas
-    TravelLayer.removeChildren()
-    await TravelLayer.draw()
+    let tcl = canvas.getLayer(TravelCanvasLayer.name)
+    tcl.removeChildren()
+    await tcl.draw()
 }
+
 
 Hooks.on("createNote", refresh)
 Hooks.on("updateNote", refresh)
