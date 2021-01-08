@@ -37,6 +37,13 @@ function buildClosenessMap(notes) {
 
 export class TravelCanvasLayer extends CanvasLayer {
 
+    static get layerOptions() {
+        return {
+            ...super.layerOptions,
+            zIndex: 500
+        }
+    }
+
     async draw() {
         await super.draw();
         if(!TravellerSettings.ShowTravel.value) return this
