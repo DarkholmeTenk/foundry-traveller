@@ -3,17 +3,51 @@ import { p2pRoutes, teleportation } from "./const.js";
 import { TravellerSettings } from "./settings.js";
 
 const log = getLogger("Canvas")
+const defaultShift = 16;
 
 function shift({x, y}, angle, radius = 20) {
     return {x: x - (radius * Math.cos(angle)), y: y - (radius * Math.sin(angle))}
 }
 
-function circleLine(graphics, pos1, pos2) {
+function getTextAngle(angle) {
+    if(angle > Math.PI / 2 && angle < 3 * (Math.PI / 2) || angle < -(Math.PI/2)) {
+        return Math.PI + angle
+    }
+    return angle
+}
+
+function drawText(container, angle, center, textContent, shiftAmount) {
+    let text = new PIXI.Text(textContent, {
+        fontSize: 48,
+        fill: 0,
+        fontWeight: "bold",
+        stroke: 0xFFFFFF,
+        strokeThickness: 4
+    });
+    let textAngle = getTextAngle(angle)
+    let textPos = shift(center, textAngle + (Math.PI / 2),  shiftAmount)
+    text.x = textPos.x
+    text.y = textPos.y
+    text.scale.set(0.5);
+    text.anchor.set(0.5);
+    text.rotation = textAngle;
+    text.zIndex = 100000;
+    container.addChild(text);
+}
+
+function circleLine(graphics, pos1, pos2, {aboveText, belowText} = {}) {
     let angle = Math.atan2(pos1.y - pos2.y, pos1.x - pos2.x)
     let newPos1 = shift(pos1, angle, 20)
     let newPos2 = shift(pos2, Math.PI + angle, 20)
     graphics.moveTo(newPos1.x, newPos1.y)
             .lineTo(newPos2.x, newPos2.y)
+    let center = {x: (newPos1.x + newPos2.x) / 2, y: (newPos1.y + newPos2.y) / 2}
+    if(aboveText) {
+        drawText(graphics.parent, angle, center, aboveText, defaultShift);
+    }
+    if(belowText) {
+        drawText(graphics.parent, angle, center, belowText, -defaultShift);
+    }
 }
 
 function buildClosenessMap(notes) {
@@ -33,6 +67,22 @@ function buildClosenessMap(notes) {
         })
     }
     return map
+}
+
+function distance(a, b) {
+    return Math.round(Math.pow(Math.pow(a.x - b.x, 2) + Math.pow(a.y - b.y, 1), 0.5))
+}
+
+function getText(fromNote, toNote, fromEntry, toEntry, travel) {
+    let text = {
+        aboveText: TravellerSettings.ShowNames.value ? `${fromEntry.name} ↔ ${toEntry.name}` : null,
+        belowText: TravellerSettings.ShowPriceTime.value ? `${travel.cost}gp - ${travel.hours} hours` : null
+    }
+    // if(travel.hours && text.belowText) {
+    //     text.belowText += `  ${Math.round(distance(fromNote, toNote) / travel.hours)}`
+    // }
+    if(!travel.cost || !travel.hours) delete text.belowText;
+    return text;
 }
 
 export class TravelCanvasLayer extends CanvasLayer {
@@ -106,9 +156,9 @@ export class TravelCanvasLayer extends CanvasLayer {
                     return;
                 done[`${target}_${note.entryId}`] = true;
                 done[`${note.entryId}_${target}`] = true;
-                let { note: targetNote } = notes.find(({ note }) => note.entryId == target) || {};
+                let { note: targetNote, entry: targetEntry } = notes.find(({ note }) => note.entryId == target) || {};
                 if (targetNote) {
-                    circleLine(graphics, note, targetNote);
+                    circleLine(graphics, note, targetNote, getText(note, targetNote, entry, targetEntry, route));
                 }
             });
         });

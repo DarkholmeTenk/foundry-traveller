@@ -72,5 +72,21 @@ export class TravellerSettings {
         onChange: ()=>refresh(),
         icon: "fab fa-fort-awesome"
     })
-    static Togglers = [this.ShowTravel, this.ShowSiltStrider, this.ShowBoat, this.ShowMages, this.ShowPropylon]
+    static ShowNames = new Setting("ShowNames", {
+        name: "Show Names",
+        scope: "client",
+        type: Boolean,
+        default: false,
+        onChange: ()=>refresh(),
+        icon: "fas fa-signature"
+    })
+    static ShowPriceTime = new Setting("ShowPriceTime", {
+        name: "Show Prices/Time",
+        scope: "client",
+        type: Boolean,
+        default: false,
+        onChange: ()=>refresh(),
+        icon: "fas fa-coins"
+    })
+    static Togglers = [this.ShowTravel, this.ShowSiltStrider, this.ShowBoat, this.ShowMages, this.ShowPropylon, this.ShowNames, this.ShowPriceTime]
 }
